@@ -14,7 +14,8 @@ function preload() {
 }
 
 function setup() {
-    frameRate(10);
+    // frameRate(10);
+    // pixelDensity(5.0);
     createCanvas(w, h);
     fruitx = floor(random(0, w - 50));
     fruity = floor(random(0, h - 50));

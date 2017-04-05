@@ -17,9 +17,9 @@ function snake () {
         sP = tailArr[i][1];
         fP2 = tailArr[i+1][0];
         sP2 = tailArr[i+1][1];
-        line(fP, sP, fP2, sP2);
         stroke(255);
         strokeWeight(10);
+        line(fP, sP, fP2, sP2);
     }
     strokeWeight(1);
     // }
@@ -33,10 +33,7 @@ function snake () {
     //Can make for loop to only replace either y or x to 0 or w.
     if(posx === w) {posx = 0; tailArr = [];}
     else if (posx === 0) {posx = w; tailArr = [];}
-    if (posy === h) {
-        posy = 0; 
-        tailArr = [];
-    }
+    if (posy === h) {posy = 0; tailArr = [];}
     else if (posy === 0) {posy = h; tailArr = [];}
 
     controls();
