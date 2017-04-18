@@ -27,8 +27,11 @@ function setup() {
     cnv = createCanvas(w, h);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
+    rFruitSp = floor(random(5000, 20000));
     cnv.position(x, y);
     centerCanvas();
+    // spawnDefFruit();
+    setInterval(spawnRedFruit, rFruitSp);
     fruitx = floor(random(30, w - 30));
     fruity = floor(random(30, h - 30));
     noLoop();
@@ -38,7 +41,6 @@ function setup() {
 function draw() {
 
     background(0);
-
     if (keyCount === 0) {
         fill(255,0,0);
         textSize(30);
@@ -51,11 +53,13 @@ function draw() {
     ellipse(posx, posy, 15);
     ellipseMode(CENTER);
 
-    snake();
+    //fruit
     fruitSpawn();
+    drawNewFruit();
+    fruitCollision();
+
+    snake();
     scoreVis();
-    var redFruit = new newFruit(20, 50);
-    console.log(redFruit);
     // strokeWeight(5);
     
     // controls();
