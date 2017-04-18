@@ -34,10 +34,16 @@ function snake () {
     }
 
     //Can make for loop to only replace either y or x to 0 or w.
-    if(posx === w) {/*posx = 0; tailArr = [];*/reset();}
-    else if (posx === 0) {/*posx = w; tailArr = [];*/ reset();}
-    if (posy === h) {/*posy = 0; tailArr = [];*/ reset();}
-    else if (posy === 0) {/*posy = h; tailArr = [];*/ reset();}
+    if(posx === w || 
+    posx === 0 ||
+    posy === h ||
+    posy === 0) {
+        reset();
+    }
+    // if(posx === w) {/*posx = 0; tailArr = [];*/reset();}
+    // else if (posx === 0) {/*posx = w; tailArr = [];*/ reset();}
+    // if (posy === h) {/*posy = 0; tailArr = [];*/ reset();}
+    // else if (posy === 0) {/*posy = h; tailArr = [];*/ reset();}
 
     controls();
     collision(posx, posy);
