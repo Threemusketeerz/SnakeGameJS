@@ -3,7 +3,8 @@ var fruitArr = [];
 function fruitSpawn() {
     image(fruit, fruitx, fruity, fW, fH);
     imageMode(CENTER);
-    rFruitSp = floor(random(5000, 20000));
+
+    //rewrite to fit fruit objects instead.
     for (var i = 0; i < tailArr.length - 1; i++) {
         if ((fruitx <= tailArr[i][0] + 5 
         && fruitx >= tailArr[i][0] - 5 
