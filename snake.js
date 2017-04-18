@@ -1,6 +1,7 @@
 var tLength, tailx, taily, vel;
 tLength = 0;
 var tailArr = [];
+var tScore = 0;
 var contr = {
     up: false,
     left: false,
@@ -9,9 +10,10 @@ var contr = {
 };
 
 function snake () {
-    vel = 2;
+    vel = 3;
     tailArr.unshift([posx, posy]);
-    tailArr = tailArr.slice(0, (tLength - 1));
+    tailArr = tailArr.slice(0, tLength-1);
+    // console.log(posx, posy, tailArr);
     for (var i = 0; i < tailArr.length - 1; i++) {
         fP = tailArr[i][0];
         sP = tailArr[i][1];
@@ -24,19 +26,21 @@ function snake () {
     strokeWeight(1);
     // }
     if (posx >= fruitx - 12 && posx <= fruitx + 12 && posy >= fruity - 12 && posy <= fruity + 12) {
-        tLength += 10;
+        tLength += 20;
         fruitx = floor(random(0, w - 50));
         fruity = floor(random(0, h - 50));
         image(fruit, fruitx, fruity, fW, fH);
+        tScore += 10;
     }
 
     //Can make for loop to only replace either y or x to 0 or w.
-    if(posx === w) {posx = 0; tailArr = [];}
-    else if (posx === 0) {posx = w; tailArr = [];}
-    if (posy === h) {posy = 0; tailArr = [];}
-    else if (posy === 0) {posy = h; tailArr = [];}
+    if(posx === w) {/*posx = 0; tailArr = [];*/reset();}
+    else if (posx === 0) {/*posx = w; tailArr = [];*/ reset();}
+    if (posy === h) {/*posy = 0; tailArr = [];*/ reset();}
+    else if (posy === 0) {/*posy = h; tailArr = [];*/ reset();}
 
     controls();
+    collision(posx, posy);
     // console.log("Pos: " + posx, posy);
     // console.log("tail: ", tailArr);
 }
@@ -45,28 +49,28 @@ function controls() {
 
     //using object to manage controls, this limits the controls ex. up can't go down.
     if (keyCode === UP_ARROW && contr.down === false) {
-        console.log("up");
+        // console.log("up");
         contr.up = true;
         contr.left = false;
         contr.right = false;
         contr.down = false;
     }
     if (keyCode === LEFT_ARROW && contr.right === false){
-        console.log("left");
+        // console.log("left");
         contr.up = false;
         contr.left = true;
         contr.right = false;
         contr.down = false;
     }
     if (keyCode === RIGHT_ARROW && contr.left === false){
-        console.log("right");
+        // console.log("right");
         contr.up = false;
         contr.left = false;
         contr.right = true;
         contr.down = false;
     }
     if (keyCode === DOWN_ARROW && contr.up === false) {
-        console.log("down");
+        // console.log("down");
         contr.up = false;
         contr.left = false;
         contr.right = false;
@@ -84,5 +88,13 @@ function controls() {
     }
     if (contr.down === true) {
         posy += vel;
+    }
+}
+
+function collision(x, y) {
+    for (var i = 1; i < tailArr.length; i++) {
+        if (tailArr[i][0] === x && tailArr[i][1] === y){
+            reset();  
+        }
     }
 }
