@@ -10,7 +10,7 @@ var contr = {
 };
 
 function snake () {
-    vel = 3;
+    vel = 5;
     tailArr.unshift([posx, posy]);
     tailArr = tailArr.slice(0, tLength-1);
     // console.log(posx, posy, tailArr);
@@ -25,26 +25,14 @@ function snake () {
     }
     strokeWeight(1);
     // }
-    if (posx >= fruitx - 12 && posx <= fruitx + 12 && posy >= fruity - 12 && posy <= fruity + 12) {
-        tLength += 20;
-        fruitx = floor(random(0, w - 50));
-        fruity = floor(random(0, h - 50));
-        image(fruit, fruitx, fruity, fW, fH);
-        tScore += 10;
-    }
 
     //Can make for loop to only replace either y or x to 0 or w.
-    if(posx === w || 
-    posx === 0 ||
-    posy === h ||
-    posy === 0) {
+    if(posx >= w || 
+    posx <= 2 ||
+    posy >= h ||
+    posy <= 2) {
         reset();
     }
-    // if(posx === w) {/*posx = 0; tailArr = [];*/reset();}
-    // else if (posx === 0) {/*posx = w; tailArr = [];*/ reset();}
-    // if (posy === h) {/*posy = 0; tailArr = [];*/ reset();}
-    // else if (posy === 0) {/*posy = h; tailArr = [];*/ reset();}
-
     controls();
     collision(posx, posy);
     // console.log("Pos: " + posx, posy);

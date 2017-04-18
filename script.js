@@ -1,4 +1,4 @@
-var posx, posy, fruitx, fruity;
+var posx, posy, fruitx, fruity, cnv;
 //tail, tailx, taily;
 var w = 800;
 var h = 600;
@@ -15,13 +15,22 @@ function preload() {
     bitFont = loadFont("font/PressStart2P.ttf");
 }
 
-function setup() {
-    // frameRate(10);
-    // pixelDensity(5.0);
-    createCanvas(w, h);
-    fruitx = floor(random(0, w - 50));
-    fruity = floor(random(0, h - 50));
+function centerCanvas() {
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
+    cnv.position(x, y);
+}
 
+function setup() {
+    frameRate(20);
+    // pixelDensity(5.0);
+    cnv = createCanvas(w, h);
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
+    cnv.position(x, y);
+    centerCanvas();
+    fruitx = floor(random(30, w - 30));
+    fruity = floor(random(30, h - 30));
     noLoop();
     // console.log("fruit: " + fruitx +" "+ fruity);
 }
@@ -38,20 +47,20 @@ function draw() {
         text("Press C to start",w/2 - 100, h/2+ 30);
     }
 
-    image(fruit, fruitx, fruity, fW, fH);
-    imageMode(CENTER);
-
     fill(255);
-    ellipse(posx, posy, 20);
+    ellipse(posx, posy, 15);
     ellipseMode(CENTER);
 
     snake();
-    score();
+    fruitSpawn();
+    scoreVis();
+    var redFruit = new newFruit(20, 50);
+    console.log(redFruit);
     // strokeWeight(5);
     
     // controls();
 }
-function score() {
+function scoreVis() {
     textFont(bitFont);
     stroke(255);
     fill(255);
@@ -69,6 +78,7 @@ function keyPressed() {
     //press C to init draw() loop
     if (keyCode === 67) {
         keyCount++;
+        tScore = 0;
         loop();
     }
     return false;
@@ -85,6 +95,11 @@ function reset() {
     text("GAME OVER", w/2 - 130, h/2);
     textSize(12);
     text("Press C to restart",w/2 - 100, h/2+ 30);
-    tScore = 0;
     noLoop();
 }
+
+
+function windowResized() {
+    centerCanvas();
+}
+
