@@ -55,10 +55,15 @@ function draw() {
 
     //fruit
     spawnCollision(fruitArr);
-    spawnCollision(boostArr);
     drawNewFruit();
     fruitCollision();
     spawnDefFruit();
+
+    //boosts
+    speedBoost();
+    console.log(boostArr);
+    drawBoost();
+    spawnCollision(boostArr);
 
     snake();
     scoreVis();

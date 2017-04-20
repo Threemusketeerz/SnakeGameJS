@@ -3,17 +3,20 @@ var fruitArr = [];
 
 //perhaps move this into script.js
 function spawnCollision(arr) {
-
-    for (var i = 0; i < arr.length - 1; i++) {
-        var a = arr[i];
-        if ((a.x <= tailArr[i][0] + 5 
-        && a.x >= tailArr[i][0] - 5 
-        && a.y <= tailArr[i][1] + 5 
-        && a.y >= tailArr[i][1] - 5) 
-        || (a.x === posx && a.x === posy)) {
-                console.log("Tail is in the way, respawning " + a.id);
-                fruitx = floor(random(30, w - 30));
-                fruity = floor(random(30, h - 30));
+    if(arr.length > 0 && tailArr.length >= 5) {
+        for (var i = 0; i < tailArr.length - 1; i++) {
+            for (var j = 0; j < arr.length - 1; j++) {
+                var a = arr[j];
+                if ((a.x <= tailArr[i][0] + 5 
+                && a.x >= tailArr[i][0] - 5 
+                && a.y <= tailArr[i][1] + 5 
+                && a.y >= tailArr[i][1] - 5) 
+                || (a.x === posx && a.x === posy)) {
+                        console.log("Tail/head is in the way, respawning " + a.id);
+                        a.x = floor(random(30, w - 30));
+                        a.y = floor(random(30, h - 30));
+                }
+            }
         }
     }
 }
