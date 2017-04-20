@@ -1,17 +1,17 @@
 var rFruitSp;
 var fruitArr = [];
-function fruitSpawn() {
-    image(fruit, fruitx, fruity, fW, fH);
-    imageMode(CENTER);
 
-    //rewrite to fit fruit objects instead.
-    for (var i = 0; i < tailArr.length - 1; i++) {
-        if ((fruitx <= tailArr[i][0] + 5 
-        && fruitx >= tailArr[i][0] - 5 
-        && fruity <= tailArr[i][1] + 5 
-        && fruity >= tailArr[i][1] - 5) 
-        || (fruitx === posx && fruity === posy)) {
-                console.log("Tail is in the way, respawning fruit");
+//perhaps move this into script.js
+function spawnCollision(arr) {
+
+    for (var i = 0; i < arr.length - 1; i++) {
+        var a = arr[i];
+        if ((a.x <= tailArr[i][0] + 5 
+        && a.x >= tailArr[i][0] - 5 
+        && a.y <= tailArr[i][1] + 5 
+        && a.y >= tailArr[i][1] - 5) 
+        || (a.x === posx && a.x === posy)) {
+                console.log("Tail is in the way, respawning " + a.id);
                 fruitx = floor(random(30, w - 30));
                 fruity = floor(random(30, h - 30));
         }
@@ -25,26 +25,24 @@ function newFruit(score, tail) {
     this.tailExt = tail;
 }
 
-// function spawnDefFruit() {
-//     var defFruit = new newFruit(10, 10);
-//     defFruit.r = 0;
-//     defFruit.g = 255;
-//     defFruit.b = 0;
-//     defFruit.id = 'def';
-//     fruitArr.push(defFruit);
-
-//     /*Previous version of fruit, moved to object based.*/
-//     // if (posx >= fruitx - 12 
-//     // && posx <= fruitx + 12 
-//     // && posy >= fruity - 12 
-//     // && posy <= fruity + 12) {
-//     //     tLength += 100;
-//     //     fruitx = floor(random(30, w - 30));
-//     //     fruity = floor(random(30, h - 30));
-//     //     image(fruit, fruitx, fruity, fW, fH);
-//     //     tScore += 10;
-//     // }
-// }
+function spawnDefFruit() {
+    var defFruitC = 0;
+    var defFruit = new newFruit(10, 10);
+    defFruit.r = 0;
+    defFruit.g = 255;
+    defFruit.b = 0;
+    defFruit.id = 'def';
+    for(var i = 0; i < fruitArr.length; i++) {
+        f = fruitArr[i];
+        if (f.id === 'def') {
+            defFruitC++;
+        }
+    }
+    if (defFruitC === 0) {
+        fruitArr.push(defFruit);
+        defFruitC++;
+    }
+}
 
 function spawnRedFruit() {
     var redFruit = new newFruit(30, 30);
@@ -52,27 +50,21 @@ function spawnRedFruit() {
     redFruit.g = 0;
     redFruit.b = 0;
     redFruit.id = 'red';
-    // var x = redFruit.x;
-    // var y = redFruit.y;
-    // var score = redFruit.score;
-    // var tailExt = redFruit.tailExt;
-    // console.log(redFruit);
-    // fruitArr.unshift({redFruit});
     fruitArr.push(redFruit);
-    // console.log(fruitArr);
 }
 
 function drawNewFruit() {
     if(fruitArr.length !== undefined) {
         for (var i = 0; i < fruitArr.length; i++) {
             var f = fruitArr[i];
-            // console.log(fruitArr[i].col);
             fill(f.r, f.g, f.b);
             ellipse(fruitArr[i].x, fruitArr[i].y, 20);
         }
     }
 }
 
+
+//This can be used for boosts also, just minor modifications
 function fruitCollision() {
     if(fruitArr.length !== undefined) {
         //For loop has to go in reverse to avoid complications with splice()
@@ -89,5 +81,3 @@ function fruitCollision() {
         }
     }
 }
-// var redFruit = new newFruit(20, 50);
-// console.log(redFruit);

@@ -42,6 +42,7 @@ function snake () {
 function controls() {
 
     //using object to manage controls, this limits the controls ex. up can't go down.
+    //THIS NEEDS TWEAKING, MULTIPLE INPUTS CAN BE PUT IN
     if (keyCode === UP_ARROW && contr.down === false) {
         // console.log("up");
         contr.up = true;

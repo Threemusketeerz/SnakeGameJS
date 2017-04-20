@@ -32,8 +32,8 @@ function setup() {
     centerCanvas();
     // spawnDefFruit();
     setInterval(spawnRedFruit, rFruitSp);
-    fruitx = floor(random(30, w - 30));
-    fruity = floor(random(30, h - 30));
+    // fruitx = floor(random(30, w - 30));
+    // fruity = floor(random(30, h - 30));
     noLoop();
     // console.log("fruit: " + fruitx +" "+ fruity);
 }
@@ -54,9 +54,11 @@ function draw() {
     ellipseMode(CENTER);
 
     //fruit
-    fruitSpawn();
+    spawnCollision(fruitArr);
+    spawnCollision(boostArr);
     drawNewFruit();
     fruitCollision();
+    spawnDefFruit();
 
     snake();
     scoreVis();
