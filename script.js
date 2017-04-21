@@ -9,6 +9,7 @@ posx = w/2;
 posy = h/2;
 var gameOver = false;
 var keyCount = 0;
+var fps = 20;
 
 function preload() {
     fruit = loadImage("images/fruit.png");
@@ -22,18 +23,19 @@ function centerCanvas() {
 }
 
 function setup() {
-    frameRate(20);
+    frameRate(fps);
     // pixelDensity(5.0);
     cnv = createCanvas(w, h);
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
-    rFruitSp = floor(random(5000, 20000));
     cnv.position(x, y);
     centerCanvas();
 
+    spawnRedFruit();
     speedBoost();
+    invertControls();
     // spawnDefFruit();
-    setInterval(spawnRedFruit, rFruitSp);
+    // setInterval(spawnRedFruit, rand);
     // fruitx = floor(random(30, w - 30));
     // fruity = floor(random(30, h - 30));
     noLoop();
@@ -41,7 +43,6 @@ function setup() {
 }
 
 function draw() {
-
     background(0);
     if (keyCount === 0) {
         fill(255,0,0);
@@ -63,6 +64,7 @@ function draw() {
 
     //boosts
     // speedBoost();
+    boostCollision();   
     drawBoost();
     spawnCollision(boostArr);
 
@@ -88,6 +90,7 @@ function keyPressed() {
     }
 
     //press C to init draw() loop
+    //Fix score 0 problem.
     if (keyCode === 67) {
         keyCount++;
         tScore = 0;

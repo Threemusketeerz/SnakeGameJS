@@ -48,12 +48,14 @@ function spawnDefFruit() {
 }
 
 function spawnRedFruit() {
+    var rand = floor(random(5000, 20000));
     var redFruit = new newFruit(30, 30);
     redFruit.r = 255;
     redFruit.g = 0;
     redFruit.b = 0;
     redFruit.id = 'red';
     fruitArr.push(redFruit);
+    setTimeout(spawnRedFruit, rand);
 }
 
 function drawNewFruit() {
