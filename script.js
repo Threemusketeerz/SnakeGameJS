@@ -30,6 +30,8 @@ function setup() {
     rFruitSp = floor(random(5000, 20000));
     cnv.position(x, y);
     centerCanvas();
+
+    speedBoost();
     // spawnDefFruit();
     setInterval(spawnRedFruit, rFruitSp);
     // fruitx = floor(random(30, w - 30));
@@ -60,8 +62,7 @@ function draw() {
     spawnDefFruit();
 
     //boosts
-    speedBoost();
-    console.log(boostArr);
+    // speedBoost();
     drawBoost();
     spawnCollision(boostArr);
 

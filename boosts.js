@@ -12,14 +12,13 @@ function newBoost(id, duration, longevity) {
 //Might have to put all boosts inside setup for setInterval.
 //How do you determine longevity of a boost.
 function speedBoost() {
+    var rand = floor(random(5000, 20000));
     var sp = new newBoost('speed', 20, 20);
     sp.r = 100;
     sp.g = 100;
     sp.b = 0;
     boostArr.push(sp);
-    // fill(sp.r, sp.g, sp.b);
-    // rectMode(CENTER);
-    // rect(sp.x, sp.y, 20, 20);
+    setTimeout(speedBoost, rand);
 }
 
 function extremeBoost() {
@@ -43,6 +42,21 @@ function drawBoost() {
             fill(ba.r, ba.g, ba.b);
             rectMode(CENTER);
             rect(ba.x, ba.y, 20, 20);
+        }
+    }
+}
+
+function boostCollision() {
+    if(boostArr.length !== undefined) {
+        //For loop has to go in reverse to avoid complications with splice()
+        for (var i = boostArr.length - 1; i > -1; i--) {
+            var b = boostArr[i];
+            if (posx <= b.x + 10 
+            && posx >= b.x - 10
+            && posy <= b.y + 10
+            && posy >= b.y - 10) {
+                boostArr.splice(i, 1);
+            }
         }
     }
 }
