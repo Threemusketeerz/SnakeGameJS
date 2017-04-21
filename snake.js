@@ -11,6 +11,8 @@ var contr = {
 
 function snake () {
     vel = 5;
+
+    //make this object based.
     tailArr.unshift([posx, posy]);
     tailArr = tailArr.slice(0, tLength-1);
     // console.log(posx, posy, tailArr);
